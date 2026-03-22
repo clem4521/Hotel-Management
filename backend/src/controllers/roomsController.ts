@@ -56,7 +56,24 @@ export async function addRoom(req:Request,res:Response) {
     }
 }
 
-/** Check if room has already been created
+export async function deleteRoom(req:Request,res:Response){
+    const {floor,room_number} = req.body;
+    const deleteRoomQuery = `DELETE FROM rooms WHERE floor = ? AND room_number = ?`;
+
+    try {
+        const isRoomExists = await roomCheck(floor,room_number);
+        if(isRoomExists){
+            const [results] = await db.query(deleteRoomQuery,[floor,room_number]);
+            res.json({messgae:"room delete"});
+        }else{
+            res.json({message:"room does not exist"});
+        }
+    } catch (error) {
+        
+    }
+}
+
+/** Check if room exist
  ** return true if there's a room
  */
 async function roomCheck(floor:number,room_number:number):Promise<boolean>{
@@ -65,14 +82,15 @@ async function roomCheck(floor:number,room_number:number):Promise<boolean>{
         const [results] = await db.query(getRoomQuery,[floor,room_number]);
          //@ts-expect-error
         const floorNum = results[0].floor;
-        if(floorNum == floorNum){
-            console.log(results);
+        //@ts-expect-error
+        const roomNum = results[0].room_number;
+        if(floorNum == floor && roomNum == room_number){
             return true;
         }else{
             false;
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 
     return false;
