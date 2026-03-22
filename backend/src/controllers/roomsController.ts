@@ -11,12 +11,12 @@ export async function getRooms(req:Request,res:Response){
         if(error.code == 'ER_NO_SUCH_TABLE'){
             const roomTableQuery = `
                 CREATE TABLE IF NOT EXISTS rooms(
-                    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                    floor INTEGER(10),
-                    room_number INTEGER(20),
-                    room_type VARCHAR(50),
-                    bed_type VARCHAR(50),
-                    bed_count INTEGER(20)
+                    id INTEGER PRIMARY KEY AUTO_INCREMENT ,
+                    floor INTEGER(10) NOT NULL,
+                    room_number INTEGER(20) NOT NULL,
+                    room_type VARCHAR(50) NOT NULL,
+                    bed_type VARCHAR(50) NOT NULL,
+                    bed_count INTEGER(20) NOT NULL
                 )
             `;
 			const results = await db.query(roomTableQuery);
