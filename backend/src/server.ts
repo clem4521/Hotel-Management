@@ -1,5 +1,5 @@
 import express from "express";
-import roomsRouter from "./routers/roomsRouter.js";
+import roomsRouter from "./routers/roomsRouter.ts";
 import dotenv from "dotenv";
 dotenv.config({quiet:true});
 
