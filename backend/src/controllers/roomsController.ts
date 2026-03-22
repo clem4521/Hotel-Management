@@ -14,9 +14,7 @@ export async function getRooms(req:Request,res:Response){
                     id INTEGER PRIMARY KEY AUTO_INCREMENT ,
                     floor INTEGER(10) NOT NULL,
                     room_number INTEGER(20) NOT NULL,
-                    room_type VARCHAR(50) NOT NULL,
-                    bed_type VARCHAR(50) NOT NULL,
-                    bed_count INTEGER(20) NOT NULL
+                    room_type VARCHAR(50) NOT NULL
                 )
             `;
 			const results = await db.query(roomTableQuery);
