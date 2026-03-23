@@ -2,7 +2,7 @@ import type { Request,Response } from "express";
 import {mysqlConfig as db }from "../config/mysqlConfig.ts";
 
 export async function getRooms(req:Request,res:Response){
-    const getRoomsQuery = `SELECT * FROM rooms`
+    const getRoomsQuery = `SELECT * FROM rooms`;
     try{
         const [results] = await db.query(getRoomsQuery);
         res.status(200).json({message:"successs",results});
