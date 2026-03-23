@@ -43,10 +43,13 @@ export async function addRoom(req:Request,res:Response) {
         VALUES(?,?,?,?)
     `;
     const {floor,room_number,room_type,status} = req.body;
+    
+    const room_status = status.charAt(0).toUpperCase() + status.slice(1);
+
     try {
         const isRoomExists = await roomCheck(floor,room_number);
         if(!isRoomExists){
-            const [results] = await db.query(addRoomQuery,[floor,room_number,room_type,status]);
+            const [results] = await db.query(addRoomQuery,[floor,room_number,room_type,room_status]);
             res.status(200).json({message:"success"});
         }else{
             res.json({message:"room has already created"});
