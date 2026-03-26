@@ -1,6 +1,24 @@
+import { useState,useEffect } from "react";
 import RoomContainer from "./RoomContainer";
+import instance from "../utils/axios";
 
 export default function RoomsContainer(){
+
+    const [rooms,setRooms] = useState([]);
+
+    useEffect(()=>{
+        try {
+            instance.get("/api/rooms")
+                .then((res)=>{
+                    console.log(res.data.results);
+                    setRooms(res.data.results);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    },[]);
+    
+
     return(
         <div className="border border-gray-500 w-128 h-75 rounded-2xl">
             <div>
@@ -10,20 +28,11 @@ export default function RoomsContainer(){
                     <h1 className="w-30">Occupied: <span className="">12</span></h1>
                     <h1 className="w-30">Cleaning: <span className="">12</span></h1>
                 </div>
-                {/* Change this later when backend is connected to the frontend*/}
                 <div className="flex flex-col gap-2 w-127 pl-2 h-65 overflow-y-auto">
-                    <RoomContainer floor={1} room_num={1} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={2} room_type={"King"} status={"Occupied"}/>
-                    <RoomContainer floor={1} room_num={3} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={4} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Cleaning"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
-                    <RoomContainer floor={1} room_num={5} room_type={"King"} status={"Unoccupied"}/>
+                    {rooms.map((room)=>(
+                        //@ts-ignore
+                        <RoomContainer floor={room.floor} room_num={room.room_number} room_type={room.room_type} status={room.status}/>
+                    ))}
                 </div>
             </div>
         </div>

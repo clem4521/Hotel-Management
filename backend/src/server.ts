@@ -2,6 +2,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 /* ---Routers--- */
 import roomsRouter from "./routers/roomsRouter.ts";
@@ -15,6 +16,9 @@ const server = express();
 /* ---Middleware--- */
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended:true}));
+server.use(cors({
+    origin:process.env.ORIGIN
+}));
 
 /*-----Endpoint-----*/
 server.use("/api",roomsRouter);
