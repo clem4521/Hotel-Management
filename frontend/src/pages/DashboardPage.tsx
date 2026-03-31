@@ -10,9 +10,14 @@ function DashBoardPage(){
     const [checkInBtnStatus,setCheckInBtnStatus] = useState(true);
 
     const handleBooleanChange = (booleanValue:any) => {
-        console.log(true);
         setCheckInBtnStatus(booleanValue);
     };
+
+    const disable = (event:any) => {
+        if (event.target === event.currentTarget) {
+            setCheckInBtnStatus(true);
+        }
+    }
 
     return(
         <div>
@@ -26,7 +31,7 @@ function DashBoardPage(){
                <div className="absolute top-2 right-5">
                     <AddMoreRoomBtn/>
                </div>
-               <div className={`flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65 ${checkInBtnStatus?"hidden":"block"}`}>
+               <div  onClick={disable} className={`flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65 ${checkInBtnStatus?"hidden":"block"}`}>
                     <CheckInForm/>
                </div>
             </main>
