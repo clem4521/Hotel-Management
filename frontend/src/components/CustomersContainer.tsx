@@ -1,4 +1,3 @@
-import { useState,useRef } from "react";
 export default function CustomersContainer(props: { isHidden: (booleanValue: any) => void }){
     const handleClick = () => {
         props.isHidden(false); 

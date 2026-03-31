@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function CheckinBtn({isHidden}:any){
     const handleClick = () => {
         isHidden(false); 

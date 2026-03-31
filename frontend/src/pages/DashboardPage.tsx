@@ -13,7 +13,7 @@ function DashBoardPage(){
         setCheckInBtnStatus(booleanValue);
     };
 
-    const disable = (event:any) => {
+    const disable = (event:React.MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
             setCheckInBtnStatus(true);
         }
