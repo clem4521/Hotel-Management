@@ -4,19 +4,36 @@ import AddMoreRoomBtn from "../components/AddMoreRoomBtn";
 import CheckInForm from "../components/CheckInForm";
 import CustomersContainer from "../components/CustomersContainer";
 import RoomsContainer from "../components/RoomsContainer";
+import CheckoutForm from "../components/CheckoutForm";
+
 
 function DashBoardPage(){
 
     const [checkInBtnStatus,setCheckInBtnStatus] = useState(true);
+    const [checkOutBtnstatus,setCheckOutBtnstatus] = useState(true);
 
-    const handleBooleanChange = (booleanValue:any) => {
+    const handleCheckInForm= (booleanValue:any) => {
+        console.log("check in");
         setCheckInBtnStatus(booleanValue);
     };
 
-    const disable = (event:React.MouseEvent<HTMLDivElement>) => {
-        if (event.target === event.currentTarget) {
-            setCheckInBtnStatus(true);
-        }
+    const handleCheckOutForm= (booleanValue:any) => {
+        console.log("check out");
+        setCheckOutBtnstatus(booleanValue);
+    };
+
+    const disableForms = (event:React.MouseEvent<HTMLDivElement>) => {
+       if(!checkInBtnStatus && checkOutBtnstatus){
+            if (event.target === event.currentTarget) {
+                setCheckInBtnStatus(true);
+            }
+       }
+
+       if(!checkOutBtnstatus && checkInBtnStatus){
+            if (event.target === event.currentTarget) {
+                setCheckOutBtnstatus(true);
+            }
+       }
     }
 
     return(
@@ -26,13 +43,16 @@ function DashBoardPage(){
                     <RoomsContainer/>
                </div>
                 <div className="absolute top-4 left-10">
-                    <CustomersContainer isHidden={handleBooleanChange}/>
+                    <CustomersContainer isHiddenCheckIn={handleCheckInForm} isHiddenCheckOut={handleCheckOutForm}/>
                 </div>
                <div className="absolute top-2 right-5">
                     <AddMoreRoomBtn/>
                </div>
-               <div  onClick={disable} className={`flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65 ${checkInBtnStatus?"hidden":"block"}`}>
+               <div  onClick={disableForms} className={`flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65 ${checkInBtnStatus?"hidden":"block"}`}>
                     <CheckInForm/>
+               </div>
+               <div onClick={disableForms} className={`${checkOutBtnstatus?"hidden":"block"} flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65`}>
+                    <CheckoutForm/>
                </div>
             </main>
         </div>

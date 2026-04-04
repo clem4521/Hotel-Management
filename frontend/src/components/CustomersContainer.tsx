@@ -1,8 +1,11 @@
-export default function CustomersContainer(props: { isHidden: (booleanValue: any) => void }){
-    const handleClick = () => {
-        props.isHidden(false); 
+export default function CustomersContainer(props: { isHiddenCheckIn: (booleanValue: any) => void,isHiddenCheckOut: (booleanValue: any) => void }){
+    const handleCheckInClick = () => {
+        props.isHiddenCheckIn(false); 
     };
 
+    const handleCheckOutClick = () => {
+        props.isHiddenCheckOut(false); 
+    };
 
 
     return(
@@ -11,10 +14,10 @@ export default function CustomersContainer(props: { isHidden: (booleanValue: any
             <div className=" absolute w-full border-b flex flex-row top-2">
                 <h1>Guests</h1>
                 <div className="absolute right-3">
-                    <button onClick={handleClick} className="border border-green-400 hover:bg-green-500 hover:text-white rounded-2xl w-18">
+                    <button onClick={handleCheckInClick} className="border border-green-400 hover:bg-green-500 hover:text-white rounded-2xl w-18">
                         <h1>Check In</h1>
                     </button>
-                    <button className="border border-green-400 hover:bg-green-500 hover:text-white rounded-2xl w-22 ml-2">
+                    <button onClick={handleCheckOutClick} className="border border-green-400 hover:bg-green-500 hover:text-white rounded-2xl w-22 ml-2">
                         <h1>Check out</h1>
                     </button>
                 </div>
