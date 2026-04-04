@@ -20,7 +20,7 @@ export default function RoomsContainer(){
     
 
     return(
-        <div className="border border-gray-500 w-128 h-75 rounded-2xl">
+        <div className="border border-gray-500 w-lg h-75 rounded-2xl">
             <div>
                 <div className="pl-2 mb-2 border-b flex flex-row gap-4">
                     <h1>Rooms</h1>
