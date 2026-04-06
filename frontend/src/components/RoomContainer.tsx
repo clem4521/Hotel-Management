@@ -6,7 +6,7 @@ export default function RoomContainer({floor,room_num,room_type,status}:any){
         status === "Cleaning"?"text-yellow-600":"text-black";
 
     return(
-        <div className="border border-gray-500 w-120 h-7 cursor-default pl-2">
+        <div className="border border-gray-500 w-lg h-7 cursor-default pl-2 rounded-2xl">
             <div className="text-[16px] flex flex-row gap-3">
                 <h1>Floor: {floor}</h1>
                 <h1>Room Number: {room_num}</h1>
