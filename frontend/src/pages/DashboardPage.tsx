@@ -5,33 +5,45 @@ import CheckInForm from "../components/CheckInForm";
 import CustomersContainer from "../components/CustomersContainer";
 import RoomsContainer from "../components/RoomsContainer";
 import CheckoutForm from "../components/CheckoutForm";
+import MoreRoomsForms from "../components/MoreRoomsForm";
 
 
 function DashBoardPage(){
 
     const [checkInBtnStatus,setCheckInBtnStatus] = useState(true);
     const [checkOutBtnstatus,setCheckOutBtnstatus] = useState(true);
+    const [addRoomBtn,setAddRoomBtn] = useState(true);
 
     const handleCheckInForm= (booleanValue:any) => {
-        console.log("check in");
+        //console.log("check in");
         setCheckInBtnStatus(booleanValue);
     };
 
     const handleCheckOutForm= (booleanValue:any) => {
-        console.log("check out");
+        //console.log("check out");
         setCheckOutBtnstatus(booleanValue);
     };
 
+    const handleAddMoreBtn = (booleanValue:any) => {
+        //console.log("Add More rooms")
+        setAddRoomBtn(booleanValue);
+    };
+
     const disableForms = (event:React.MouseEvent<HTMLDivElement>) => {
-       if(!checkInBtnStatus && checkOutBtnstatus){
+       if(!checkInBtnStatus && checkOutBtnstatus && addRoomBtn){
             if (event.target === event.currentTarget) {
                 setCheckInBtnStatus(true);
-            }
+            } 
        }
 
-       if(!checkOutBtnstatus && checkInBtnStatus){
+       if(!checkOutBtnstatus && checkInBtnStatus && addRoomBtn){
             if (event.target === event.currentTarget) {
                 setCheckOutBtnstatus(true);
+            }
+       }
+       if(checkOutBtnstatus && !addRoomBtn && checkInBtnStatus){
+            if (event.target === event.currentTarget) {
+                setAddRoomBtn(true);
             }
        }
     }
@@ -46,7 +58,10 @@ function DashBoardPage(){
                     <CustomersContainer isHiddenCheckIn={handleCheckInForm} isHiddenCheckOut={handleCheckOutForm}/>
                 </div>
                <div className="absolute top-2 right-5">
-                    <AddMoreRoomBtn/>
+                    <AddMoreRoomBtn isHidden={handleAddMoreBtn}/>
+               </div>
+               <div onClick={disableForms} className={`flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65 ${addRoomBtn?"hidden":"block"}`}>
+                    <MoreRoomsForms/>
                </div>
                <div  onClick={disableForms} className={`flex justify-center items-center absolute w-screen h-screen bg-neutral-100/65 ${checkInBtnStatus?"hidden":"block"}`}>
                     <CheckInForm/>
