@@ -1,11 +1,11 @@
 import { useState } from "react";
             /*----Components----*/
-import AddMoreRoomBtn from "../components/AddMoreRoomBtn";
-import CheckInForm from "../components/CheckInForm";
-import CustomersContainer from "../components/CustomersContainer";
-import RoomsContainer from "../components/RoomsContainer";
-import CheckoutForm from "../components/CheckoutForm";
-import MoreRoomsForms from "../components/MoreRoomsForm";
+import AddMoreRoomBtn from "../components/buttons/AddMoreRoomBtn";
+import CheckInForm from "../components/forms/CheckInForm";
+import CustomersContainer from "../components/containers/CustomersContainer";
+import RoomsContainer from "../components/containers/RoomsContainer";
+import CheckoutForm from "../components/forms/CheckoutForm";
+import MoreRoomsForms from "../components/forms/MoreRoomsForm";
 
 
 function DashBoardPage(){

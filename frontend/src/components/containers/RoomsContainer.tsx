@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import RoomContainer from "./RoomContainer";
-import instance from "../utils/axios";
+import instance from "../../utils/axios";
 
 export default function RoomsContainer(){
 

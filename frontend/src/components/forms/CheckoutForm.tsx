@@ -1,4 +1,4 @@
-import SummitBtn from "./SubmitBtn";
+import SummitBtn from "../buttons/SubmitBtn";
 
 export default function CheckoutForm(){
     return(
