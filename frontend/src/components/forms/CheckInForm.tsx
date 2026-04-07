@@ -18,7 +18,7 @@ export default function CheckInForm(){
     },[])
 
     const filterRooms = (room_type:string,room_list:any[]) =>{
-         for(let i = 0;i<=rooms.length-1;i++){
+        for(let i = 0;i<=rooms.length-1;i++){
             //@ts-ignore
             if(rooms[i].status == room_type){
                 room_list.push(rooms[i])
@@ -34,10 +34,10 @@ export default function CheckInForm(){
                 <label>Name</label>
                 <input placeholder="First Name" className="w-50 bg-gray-500 rounded-2xl pl-3"/>
            </div>
-            <select id="id" name="rooms" size={1} className="w-md ml-5 bg-gray-500 overflow-y-auto">
+            <select id="id" name="rooms" size={1} className="w-85 ml-5 bg-gray-500">
                 {unoccupiedRooms.map((unoccupiedRoom)=>(
                     //@ts-ignore
-                    <option value={unoccupiedRoom.id}>Floor:{unoccupiedRoom.floor} room number:{unoccupiedRoom.room_number} room type:{unoccupiedRoom.room_type} status:{unoccupiedRoom.status}</option>
+                    <option value={unoccupiedRoom.id}>Floor: {unoccupiedRoom.floor} room number: {unoccupiedRoom.room_number} room type: {unoccupiedRoom.room_type}</option>
                 ))}
             </select>
             <div className="flex items-center justify-center">
