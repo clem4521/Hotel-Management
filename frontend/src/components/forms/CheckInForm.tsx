@@ -1,32 +1,22 @@
 import SummitBtn from "../buttons/SubmitBtn";
-import instance from "../../utils/axios";
-import { useEffect, useState } from "react";
+import useRooms from "../../hooks/useRooms";
 export default function CheckInForm(){
     
-    const [rooms,setRooms] = useState([]);
     let unoccupiedRooms:any[] = [];
-
-    useEffect(()=>{
-        try{
-            instance.get("/api/rooms")
-            .then((res)=>{
-                setRooms(res.data.results);
-            });
-        }catch(error){
-            
-        }
-    },[])
+    let getRooms = useRooms();
+    
 
     const filterRooms = (room_type:string,room_list:any[]) =>{
-        for(let i = 0;i<=rooms.length-1;i++){
+        for(let i = 0;i<=getRooms.length-1;i++){
             //@ts-ignore
-            if(rooms[i].status == room_type){
-                room_list.push(rooms[i])
+            if(getRooms[i].status == room_type){
+                room_list.push(getRooms[i])
             }
         }
     }
 
     filterRooms("Unoccupied",unoccupiedRooms);
+
     return (
         <div className="flex flex-col gap-5 bg-gray-600 w-120 h-60  text-white rounded-2xl">
             <span className="abolute text-center">Check In</span>

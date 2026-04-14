@@ -25,10 +25,11 @@ export async function getRooms(req:Request,res:Response){
 }
 export async function getRoom(req:Request,res:Response){
     const getRoomQuery = `SELECT * FROM rooms WHERE id = ?`;
-    const {id} = req.body;
-
+    const {id}:any = req.params;
+    //console.log(id);
     try{
         const [results] = await db.query(getRoomQuery,[id]);
+        //console.log(results);
         res.status(200).json({message:"successs",results});
     }catch(error){
         console.log(error);

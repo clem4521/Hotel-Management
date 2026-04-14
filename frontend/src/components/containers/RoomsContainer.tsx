@@ -1,45 +1,31 @@
-import { useState,useEffect } from "react";
 import RoomContainer from "./RoomContainer";
-import instance from "../../utils/axios";
+import useRooms from "../../hooks/useRooms";
 
 export default function RoomsContainer(){
 
-    const [rooms,setRooms] = useState([]);
+    let getRooms = useRooms();
 
     let unoccupiedRooms = 0;
     let occuppiedRooms = 0;
     let cleaningRooms = 0;
 
-    useEffect(()=>{
-        try {
-            instance.get("/api/rooms")
-            .then((res)=>{
-                setRooms(res.data.results);
-                
-            });
-            //
-        } catch (error) {
-            console.log(error);
-        }
-    },[]);
-
-    for(let i = 0;i<rooms.length;i++){
+    for(let i = 0;i<getRooms.length;i++){
         //@ts-ignore
-        if(rooms[i].status == "Unoccupied"){
+        if(getRooms[i].status == "Unoccupied"){
             unoccupiedRooms += 1;
         }
         //@ts-ignore
-        else if(rooms[i].status == "Occupied"){
+        else if(getRooms[i].status == "Occupied"){
             occuppiedRooms += 1;
         }
         //@ts-ignore
-        else if(rooms[i].status == "Cleaning"){
+        else if(getRooms[i].status == "Cleaning"){
             cleaningRooms += 1;
         }
     }
     
     return(
-        <div className="border border-gray-500 w-140 h-75 rounded-2xl">
+        <div className="border border-gray-500 w-140 h-75 rounded-2xl cursor-default">
             <div>
                 <div className="pl-2 mb-2 border-b flex flex-row gap-4">
                     <h1>Rooms</h1>
@@ -48,7 +34,7 @@ export default function RoomsContainer(){
                     <h1 className="w-30">Cleaning: <span className="">{cleaningRooms}</span></h1>
                 </div>
                 <div className="flex flex-col gap-2.5 w-138 pl-2 h-65 overflow-y-auto">
-                    {rooms.map((room)=>(
+                    {getRooms.map((room)=>(
                         //@ts-ignore
                         <RoomContainer floor={room.floor} room_num={room.room_number} room_type={room.room_type} status={room.status}/>
                     ))}
