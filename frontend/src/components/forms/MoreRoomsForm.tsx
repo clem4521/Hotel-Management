@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AddBtn from "../buttons/AddBtn.tsx";
 import instance from "../../utils/axios.ts";
 
 export default function MoreRoomsForms(){
@@ -9,12 +8,17 @@ export default function MoreRoomsForms(){
     const [statusValue,setStatusValue] = useState("");
    
     function addRoom(){
+
+        const removeStatusSpace = statusValue.trim()
+        
+        const convetFloorNumToInt = parseInt(floorNumValue);
+
         try {
             instance.post("/api/rooms",{
-                floor:floorNumValue,
+                floor:convetFloorNumToInt,
                 room_number:roomNumValue,
                 room_type:roomTypeValue,
-                status:statusValue
+                status:removeStatusSpace
             }).then(
                 (res)=>{
                     console.log(res);
@@ -24,8 +28,6 @@ export default function MoreRoomsForms(){
             console.log(error)
         }
     }
-
-    console.log(roomNumValue);
 
     return(
         <div className="flex flex-col gap-5 bg-gray-600 w-100 h-60  text-white rounded-2xl relative">
@@ -76,7 +78,9 @@ export default function MoreRoomsForms(){
                     </div>
                 </div>
                 <div className="absolute bottom-0 left-[40%]">
-                    <AddBtn/>
+                    <button onClick={addRoom} className="bg-gray-500 hover:bg-gray-400 w-20 rounded-2xl">
+                        Add
+                    </button>
                 </div>
             </div>
         </div>
