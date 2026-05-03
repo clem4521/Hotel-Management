@@ -6,8 +6,8 @@ const roomsRouter:Router = express.Router({ mergeParams: true });
 roomsRouter.get("/rooms/:id",getRoom);
 roomsRouter.get("/rooms",getRooms);
 
-roomsRouter.post("/rooms/create",addRoom);
+roomsRouter.post("/rooms",addRoom);
 
-roomsRouter.delete("/rooms/delete",deleteRoom);
+roomsRouter.delete("/rooms/:id",deleteRoom);
 
 export default roomsRouter;
